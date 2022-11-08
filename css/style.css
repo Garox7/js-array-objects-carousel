@@ -1,0 +1,115 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    padding: 0 1rem;
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* SLIDER */
+.hero__slider {
+    margin: 0 auto;
+    max-width: 1200px;
+    max-height: 600px;
+    display: flex;
+    margin-top: 4rem;
+}
+
+.hero__preview {
+    flex: 1 1 75%;
+    position: relative;
+}
+
+.hero__preview__text {
+    position: absolute;
+}
+
+.hero__thumb {
+    flex: 1 1 25%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.hero__thumb img {
+    height: 20%;
+}
+
+.hero__controls {
+    color: white;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.control-up, .control-down {
+    background-image: linear-gradient(rgba(255, 255, 255, .9), rgba(255, 255, 255, .1));
+    background-color: rgba(255, 255, 255, .1);
+    width: 100%;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .15s linear;
+}
+
+.control-down {
+    background-image: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .9)); ;
+}
+
+.control-up:hover, .control-down:hover {
+    background-color: rgba(255, 255, 255, .5);
+}
+
+@media screen and (max-width: 720px) {
+    .hero__slider {
+        max-height: 800px;
+        flex-direction: column;
+    }
+
+    .hero__preview {
+        flex: 1 1 80%;
+    }
+
+    .hero__thumb {
+        flex: 1 1 20%;
+        flex-direction: row;
+    }
+
+    .hero__thumb img {
+        width: calc(100% / 5);
+    }
+
+    .hero__controls {
+        flex-direction: row;
+    }
+
+    .control-up, .control-down {
+        background-image: linear-gradient(90deg, rgba(255, 255, 255, .9), transparent);
+        background-color: rgba(255, 255, 255, .1);
+        width: 3rem;
+        height: 100%;
+    }
+
+    .control-down {
+        background-image: linear-gradient(90deg, transparent, rgba(255, 255, 255, .9)); ;
+    }
+
+    .hero__controls i {
+        transform: rotate(270deg);
+    }
+}
