@@ -30,10 +30,25 @@ const heroPreview = document.querySelector('.hero__preview');
 const heroThumb = document.querySelector('.hero__thumb');
 const btnUp = document.querySelector('.control-up');
 const btnDown = document.querySelector('.control-down');
+const stopStartButton = document.querySelector('.start-stop__btn');
 
-function createHerotext(object) {
-    
+let indexImages = 0;
+function upSlide() {
+    listHeroImages[indexImages].classList.remove('active');
+    listThumbImages[indexImages].classList.remove('selected');
+    listTextImages[indexImages].classList.remove('show');
+
+
+    if (indexImages === 0) {
+        indexImages = listHeroImages.length;
+    }
+    indexImages--;
+
+    listHeroImages[indexImages].classList.add('active');
+    listThumbImages[indexImages].classList.add('selected');
+    listTextImages[indexImages].classList.add('show');
 }
+
 
 myArray.forEach ((object, i) => {
     
@@ -54,8 +69,7 @@ myArray.forEach ((object, i) => {
 
     }
     
-    heroPreview.append(heroText);
-    heroPreview.append(imgHero);
+    heroPreview.append(imgHero, heroText);
     heroThumb.append(imgThumb);
 });
 
@@ -63,26 +77,12 @@ const listHeroImages = heroPreview.querySelectorAll('img');
 const listThumbImages = heroThumb.querySelectorAll('img');
 const listTextImages = heroPreview.querySelectorAll('.hero__preview__text')
 
-let indexImages = 0;
+let autoPlay = setInterval(upSlide, 3000);
 
 btnUp.addEventListener('click', function () {
-
-    listHeroImages[indexImages].classList.remove('active');
-    listThumbImages[indexImages].classList.remove('selected');
-    listTextImages[indexImages].classList.remove('show');
-
-
-    if (indexImages === 0) {
-        indexImages = listHeroImages.length;
-    }
-    indexImages--;
-
-    listHeroImages[indexImages].classList.add('active');
-    listThumbImages[indexImages].classList.add('selected');
-    listTextImages[indexImages].classList.add('show');
-
-
-    console.log(indexImages);
+    clearInterval(autoPlay);
+    upSlide();
+    autoPlay = setInterval(upSlide, 3000); 
 });
 
 btnDown.addEventListener('click', function() {
@@ -104,3 +104,4 @@ btnDown.addEventListener('click', function() {
 
     console.log(indexImages);
 })
+
