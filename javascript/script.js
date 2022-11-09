@@ -147,13 +147,11 @@ const invertBtn = document.querySelector('.invert-btn');
 let inverted = true;
 invertBtn.addEventListener('click', function() {
     if (inverted === true && onOff === true) {
-        invertBtn.innerHTML = 'inverti in giù';
         clearInterval(autoPlay);
         autoPlay = setInterval(upSlide, 3000);
         inverted = false;
 
     } else if (inverted === false && onOff === true) {
-        invertBtn.innerHTML = 'inverti in sù';
         clearInterval(autoPlay);
         autoPlay = setInterval(downSlide, 3000);
         inverted = true;
