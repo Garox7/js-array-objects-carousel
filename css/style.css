@@ -11,7 +11,7 @@ html {
 body {
     width: 100vw;
     height: 100vh;
-    padding: 0 1rem;
+    padding: 2rem 1rem;
 }
 
 img {
@@ -28,7 +28,6 @@ img {
     max-width: 1200px;
     height: 600px;
     display: flex;
-    margin-top: 4rem;
 }
 
 .hero__preview {
@@ -95,7 +94,7 @@ img {
 }
 
 .control-up, .control-down {
-    background-image: linear-gradient(rgba(255, 255, 255, .9), rgba(255, 255, 255, .1));
+    background-image: linear-gradient(rgba(255, 255, 255, .9), transparent 90%);
     background-color: rgba(255, 255, 255, .1);
     width: 100%;
     height: 2rem;
@@ -106,7 +105,7 @@ img {
 }
 
 .control-down {
-    background-image: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .9)); ;
+    background-image: linear-gradient(transparent, rgba(255, 255, 255, .9)); ;
 }
 
 .control-up:hover, .control-down:hover {
@@ -127,7 +126,7 @@ img {
     height: 2rem;
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 551px) {
     .hero__slider {
         max-height: none;
         height: 800px;
@@ -135,11 +134,11 @@ img {
     }
 
     .hero__preview {
-        height: 90%;
+        flex: 1 1 100%;
     }
 
     .hero__thumb {
-        flex: 1 1 10%;
+        flex: 1 1 0;
         flex-direction: row;
     }
 

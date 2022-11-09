@@ -25,7 +25,7 @@ const myArray = [
 		text: "Marvel's Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.",
 	},
 ];
-/******** FUNIONI DI ATTRIBUZIONE CLASSI: ACTIVE, SELECTED, SHOW *********/
+/******** FUNIONI DI ATTRIBUZIONE CLASSI: ACTIVE, SELECTED, SHOW E VERSO SLIDE*********/
 let indexImages = 0;
 function upSlide() {
     listHeroImages[indexImages].classList.remove('active');
@@ -80,7 +80,6 @@ myArray.forEach ((object, i) => {
         imgHero.classList.add('active');
         imgThumb.classList.add('selected');
         heroText.classList.add('show');
-
     }
     
     heroPreview.append(imgHero, heroText);
@@ -92,7 +91,7 @@ const listHeroImages = heroPreview.querySelectorAll('img');
 const listThumbImages = heroThumb.querySelectorAll('img');
 const listTextImages = heroPreview.querySelectorAll('.hero__preview__text')
 
-autoPlay = setInterval(downSlide, 3000);
+let autoPlay = setInterval(downSlide, 3000);
 
 /******** UP BUTTON *********/
 const btnUp = document.querySelector('.control-up');
@@ -110,7 +109,6 @@ btnDown.addEventListener('click', function() {
     clearInterval(autoPlay);
     downSlide()
     autoPlay = setInterval(downSlide, 3000);
-
 })
 
 /******** START/STOP BUTTON *********/
@@ -125,19 +123,13 @@ stopStartButton.addEventListener('click', function () {
 
         console.log('hai stoppato', onOff); //DEBUG
 
-    } else if ((onOff === false) && (autoPlay = setInterval(downSlide, 3000))){
+    } else if (onOff === false) {
         stopStartButton.innerHTML = 'Stop';
         clearInterval(autoPlay);
         autoPlay = setInterval(downSlide, 3000);
         onOff = true;
 
         console.log('hai riavviato', onOff); //DEBUG
-
-    } else {
-        clearInterval(autoPlay);
-        autoPlay = setInterval(upSlide, 3000);
-        onOff = true;
-
     }
 });
 
@@ -151,9 +143,15 @@ invertBtn.addEventListener('click', function() {
         autoPlay = setInterval(upSlide, 3000);
         inverted = false;
 
+        console.log('ho cambiato direzione'); //DEBUG
+
     } else if (inverted === false && onOff === true) {
         clearInterval(autoPlay);
         autoPlay = setInterval(downSlide, 3000);
         inverted = true;
+    } else {
+
+        console.log('avviami prima di potermi invertire'); //DEBUG
     }
+
 })
