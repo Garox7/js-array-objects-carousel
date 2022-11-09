@@ -25,19 +25,16 @@ const myArray = [
 		text: "Marvel's Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.",
 	},
 ];
-
-const heroPreview = document.querySelector('.hero__preview');
-const heroThumb = document.querySelector('.hero__thumb');
-const btnUp = document.querySelector('.control-up');
-const btnDown = document.querySelector('.control-down');
-const stopStartButton = document.querySelector('.start-stop__btn');
+/******** FUNIONI DI ATTRIBUZIONE CLASSI: ACTIVE, SELECTED, SHOW *********/
+const listHeroImages = heroPreview.querySelectorAll('img');
+const listThumbImages = heroThumb.querySelectorAll('img');
+const listTextImages = heroPreview.querySelectorAll('.hero__preview__text')
 
 let indexImages = 0;
 function upSlide() {
     listHeroImages[indexImages].classList.remove('active');
     listThumbImages[indexImages].classList.remove('selected');
     listTextImages[indexImages].classList.remove('show');
-
 
     if (indexImages === 0) {
         indexImages = listHeroImages.length;
@@ -47,11 +44,32 @@ function upSlide() {
     listHeroImages[indexImages].classList.add('active');
     listThumbImages[indexImages].classList.add('selected');
     listTextImages[indexImages].classList.add('show');
+    
+    console.log('vado verso su'); //DEBUG
 }
 
+function downSlide() {
+    listHeroImages[indexImages].classList.remove('active');
+    listThumbImages[indexImages].classList.remove('selected');
+    listTextImages[indexImages].classList.remove('show');
+
+    indexImages++;
+    if (indexImages === listHeroImages.length) {
+        indexImages = 0;
+    }
+
+    listHeroImages[indexImages].classList.add('active');
+    listThumbImages[indexImages].classList.add('selected');
+    listTextImages[indexImages].classList.add('show');
+
+    console.log('vado verso giù'); // DEBUG
+}
+
+/******** CREO ELEMENTI *********/
+const heroPreview = document.querySelector('.hero__preview');
+const heroThumb = document.querySelector('.hero__thumb');
 
 myArray.forEach ((object, i) => {
-    
     const imgHero = document.createElement('img');
     imgHero.src = `img/${object.image}`;
     
@@ -73,35 +91,58 @@ myArray.forEach ((object, i) => {
     heroThumb.append(imgThumb);
 });
 
-const listHeroImages = heroPreview.querySelectorAll('img');
-const listThumbImages = heroThumb.querySelectorAll('img');
-const listTextImages = heroPreview.querySelectorAll('.hero__preview__text')
+autoPlay = setInterval(downSlide, 3000);
 
-let autoPlay = setInterval(upSlide, 3000);
+/******** UP BUTTON *********/
+const btnUp = document.querySelector('.control-up');
 
 btnUp.addEventListener('click', function () {
     clearInterval(autoPlay);
     upSlide();
-    autoPlay = setInterval(upSlide, 3000); 
+    autoPlay = setInterval(upSlide, 3000);
 });
 
+/******** DOWN BUTTON *********/
+const btnDown = document.querySelector('.control-down');
+
 btnDown.addEventListener('click', function() {
+    clearInterval(autoPlay);
+    downSlide()
+    autoPlay = setInterval(downSlide, 3000);
 
-    listHeroImages[indexImages].classList.remove('active');
-    listThumbImages[indexImages].classList.remove('selected');
-    listTextImages[indexImages].classList.remove('show');
-
-
-    indexImages++;
-    if (indexImages === listHeroImages.length) {
-        indexImages = 0;
-    }
-
-    listHeroImages[indexImages].classList.add('active');
-    listThumbImages[indexImages].classList.add('selected');
-    listTextImages[indexImages].classList.add('show');
-
-
-    console.log(indexImages);
 })
 
+/******** START/STOP BUTTON *********/
+const stopStartButton = document.querySelector('.start-stop__btn');
+
+let onOff = true;
+stopStartButton.addEventListener('click', function () {
+    if (onOff === true) {
+        stopStartButton.innerHTML = 'Start';
+        clearInterval(autoPlay);
+        onOff = false;
+
+        console.log('hai stoppato', onOff); //DEBUG
+
+    } else if ((onOff === false) && (autoPlay = setInterval(downSlide, 3000))){
+        stopStartButton.innerHTML = 'Stop';
+        clearInterval(autoPlay);
+        autoPlay = setInterval(downSlide, 3000); 
+        onOff = true;
+
+        console.log('hai riavviato', onOff); //DEBUG
+
+    } else {
+        clearInterval(autoPlay);
+        autoPlay = setInterval(upSlide, 3000);
+        onOff = true;
+
+    }
+});
+
+/******** INVERT BUTTON *********/
+const invertBtn = document.querySelector('.invert-btn');
+
+invertBtn.addEventListener('click', function() {
+
+})
