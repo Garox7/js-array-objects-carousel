@@ -26,10 +26,6 @@ const myArray = [
 	},
 ];
 /******** FUNIONI DI ATTRIBUZIONE CLASSI: ACTIVE, SELECTED, SHOW *********/
-const listHeroImages = heroPreview.querySelectorAll('img');
-const listThumbImages = heroThumb.querySelectorAll('img');
-const listTextImages = heroPreview.querySelectorAll('.hero__preview__text')
-
 let indexImages = 0;
 function upSlide() {
     listHeroImages[indexImages].classList.remove('active');
@@ -65,7 +61,7 @@ function downSlide() {
     console.log('vado verso giù'); // DEBUG
 }
 
-/******** CREO ELEMENTI *********/
+/******** IMPOSTO HTML TRAMITE L'ARRAY DI OGGETTI *********/
 const heroPreview = document.querySelector('.hero__preview');
 const heroThumb = document.querySelector('.hero__thumb');
 
@@ -90,6 +86,11 @@ myArray.forEach ((object, i) => {
     heroPreview.append(imgHero, heroText);
     heroThumb.append(imgThumb);
 });
+
+/******** IMPOSTO L'AUTOPLAY VERSO IL BASSO DI DEFAULT *********/
+const listHeroImages = heroPreview.querySelectorAll('img');
+const listThumbImages = heroThumb.querySelectorAll('img');
+const listTextImages = heroPreview.querySelectorAll('.hero__preview__text')
 
 autoPlay = setInterval(downSlide, 3000);
 
@@ -127,7 +128,7 @@ stopStartButton.addEventListener('click', function () {
     } else if ((onOff === false) && (autoPlay = setInterval(downSlide, 3000))){
         stopStartButton.innerHTML = 'Stop';
         clearInterval(autoPlay);
-        autoPlay = setInterval(downSlide, 3000); 
+        autoPlay = setInterval(downSlide, 3000);
         onOff = true;
 
         console.log('hai riavviato', onOff); //DEBUG
@@ -143,6 +144,18 @@ stopStartButton.addEventListener('click', function () {
 /******** INVERT BUTTON *********/
 const invertBtn = document.querySelector('.invert-btn');
 
+let inverted = true;
 invertBtn.addEventListener('click', function() {
+    if (inverted === true && onOff === true) {
+        invertBtn.innerHTML = 'inverti in giù';
+        clearInterval(autoPlay);
+        autoPlay = setInterval(upSlide, 3000);
+        inverted = false;
 
+    } else if (inverted === false && onOff === true) {
+        invertBtn.innerHTML = 'inverti in sù';
+        clearInterval(autoPlay);
+        autoPlay = setInterval(downSlide, 3000);
+        inverted = true;
+    }
 })
